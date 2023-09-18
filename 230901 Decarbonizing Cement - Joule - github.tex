@@ -1,0 +1,644 @@
+%-------------------------------------------------------------------------------------------------------
+%                      				PREAMBLE
+%-------------------------------------------------------------------------------------------------------
+\documentclass[12pt, a4paper]{article} %\documentclass[12pt,amstex,endnotes]{article}
+
+%%Margins
+\setlength{\hoffset}{-.55in}
+\setlength{\voffset}{-.75in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9in}
+% \setlength{\topmargin}{1in}
+% \setlength{\oddsidemargin}{1in}
+% \setlength{\evensidemargin}{1in}
+
+%%Maths
+\usepackage{amsmath, amssymb, textcomp, multirow, rotating, amsfonts, bbm, accents, gensymb}
+
+%%Use eurosymbol
+\usepackage{eurosym, textcomp, wasysym}
+
+%%Citation
+\usepackage[super,sort&compress]{natbib}
+% \usepackage[authoryear,round]{natbib}
+% \usepackage[numbers]{natbib}
+% \usepackage{cleveref}
+
+%%Tables
+%%Tables
+\usepackage{tabularx,booktabs,array,multirow,rotating,color,multicol,float}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage[center]{caption}
+\usepackage[flushleft]{threeparttable}
+
+\usepackage{tabularx,booktabs,array,multirow,rotating,color,multicol,float}
+\usepackage[flushleft]{threeparttable}
+\usepackage{longtable} % for 'longtable' environment
+\usepackage{pdflscape} % for 'landscape' environment
+%%Graphics
+\usepackage{graphicx,wrapfig,setspace}
+\graphicspath{ {./images/} }
+
+%%Formatting
+\usepackage{abstract,subfig,pdfpages,enumerate}
+\usepackage[singlelinecheck=false,justification=justified]{caption}
+\captionsetup[figure]{labelfont={bf},labelsep=period}
+\captionsetup[table]{labelfont={bf},labelsep=period}
+% \captionsetup[figure]{labelfont={bf},name={Supplementary Figure},labelsep=period}
+% \captionsetup[table]{labelfont={bf},name={Supplementary Table},labelsep=period}
+\usepackage[section]{placeins}
+\parindent5mm % No indent
+\usepackage[hang]{footmisc}
+\setlength\footnotemargin{-10pt}
+% \usepackage{endnotes}
+% \let\footnote=\endnote
+%For Environments
+\usepackage[english]{babel}
+\usepackage{amsthm}
+%%Hyperlinks in PDF-document
+\usepackage{url}
+\usepackage{hyperref} %[colorlinks=true] %http://tex.stackexchange.com/questions/50747/options-for-appearance-of-links-in-hyperrefs
+
+%%ToDo Notes
+\usepackage{todonotes}
+\reversemarginpar
+\setlength{\marginparwidth}{2cm}
+
+%% Line numbers
+\usepackage[modulo]{lineno} % Start line numbering with \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on for the whole article with \linenumbers after \end{frontmatter}.
+\usepackage{nomencl}
+
+%-------------------------------------------------------------------------------------------------------
+%                      				COMMANDS
+%-------------------------------------------------------------------------------------------------------
+% Math
+\newcommand{\sumyear}{\sum\limits_{i = 1}^{T}}
+\newcommand{\inthours}{\int\limits_{0}^{m}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+% Abbreviations
+\newcommand{\noin}{\noindent}
+
+% Special Commands
+%\newcommand{\ph}{\phantom{(}} %\includegraphics[page=1]{/path.pdf} %QED box, from the TeXbook, p. 106.
+%\newcommand\qed{{\unskip\nobreak\hfil\penalty50\hskip2em\vadjust{}\nobreak\hfil \rule{2mm}{2mm} \parfillskip=0pt\finalhyphendemerits=0\par}}
+\newcommand{\specialcellA}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\specialcellB}[2][c]{\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+\newtheorem{theorem}{Theorem}%[section] (If you want theorem numbered
+\newtheorem{lemma}{Lemma}%               with section number.  Same
+\newtheorem{corollary}{Corollary}%       goes for lemmas, etc.)
+\newtheorem{proposition}{Proposition} %--> \begin\end{theorem,lemma,...}
+\newtheorem{observation}{Observation}
+\newtheorem{definition}{Definition}
+%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newtheorem{obs}{Observation}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\baselinestretch}{1.25}
+% \linespread{1.25}\selectfont
+
+
+% -------------------------------------------------------------------------------------------------------
+%                             CROSS-REFERENCES
+%-------------------------------------------------------------------------------------------------------
+\newcommand{\methods}{\nameref{sec: methods}} % Methods
+\newcommand{\Suppl}{Supplemental}
+% \newcommand{\SNincrease}{\Suppl$ $ Note 1} % increased cement output
+
+% -------------------------------------------------------------------------------------------------------
+%                             NUMERICAL VALUES
+%-------------------------------------------------------------------------------------------------------
+%---------------Nomenclature-------------------------------%
+\makenomenclature
+
+%Create group in Nomenclature
+\usepackage{etoolbox}
+\renewcommand\nomgroup[1]{%
+  \item[\bfseries
+  \ifstrequal{#1}{S}{List of Symbols}{%
+  \ifstrequal{#1}{A}{List of Abbreviations}{%
+  \ifstrequal{#1}{O}{Other Symbols}{}}}%
+]}
+
+%-------------------------------------------------------------------------------------------------------
+%                             CONTENT
+%-------------------------------------------------------------------------------------------------------
+\begin{document}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\thispagestyle{empty}
+\pagenumbering{roman}
+%\setcounter{page}{0}
+\setcounter{footnote}{0}
+\setlength{\baselineskip}{20pt} \thispagestyle{empty}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{center}
+\hbox{}
+% \vspace{.5 truein}
+% \vspace{1cm}
+{\Large\textbf{Cost-Efficient Decarbonization of \\ Portland Cement Production}}
+
+\bigskip
+\bigskip
+{\bf Gunther Glenk}\footnotemark \\
+Harvard Business School, Harvard University \\
+Business School, University of Mannheim \\
+CEEPR, Massachusetts Institute of Technology \\
+gglenk@hbs.edu
+
+\bigskip
+\bigskip
+{\bf Anton Kelnhofer} \\
+School of Management, Technical University of Munich\\
+anton.kelnhofer@tum.de
+
+\bigskip
+\bigskip
+{\bf Rebecca Meier} \\
+Business School, University of Mannheim \\
+rebecca.meier@uni-mannheim.de
+
+\bigskip
+\bigskip
+
+{\bf Stefan Reichelstein}$^*$ \\
+Business School, University of Mannheim \\
+ZEW -- Leibniz Centre for European Economic Research \\
+Graduate School of Business, Stanford University \\
+reichelstein@uni-mannheim.de
+
+\bigskip
+\bigskip
+August 2023
+
+% \vspace{2cm}
+
+\footnotetext{We are grateful to Wolfgang Dienemann, Nicola Kimm, Teresa Landaverde, Patrick Liebmann, Peter Lukas, Eric Trusiewicz, colleagues at the University of Mannheim and the Technical University of Munich, seminar participants at Stanford University, the 2022 Decarbonization Forum, and the 2023 Mannheim Energy Conference for helpful suggestions and discussions. We also acknowledge valuable research assistance from Abirami Kumar. Financial support for this study was provided by the German Research Foundation (DFG Project-ID 403041268, TRR 266), the Joachim Hertz Foundation, and the Konrad Adenauer Foundation.}
+
+\end{center}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0}
+
+\newpage
+%-------------------------------------------------------------------------------------------------------
+%                             ABSTRACT
+%-------------------------------------------------------------------------------------------------------
+% \thispagestyle{empty}
+\noin \textbf{Abstract}
+
+\noin
+Accounting for nearly 8\% of global annual carbon dioxide (CO$_2$) emissions, the cement industry is considered difficult to decarbonize. While a sizeable number of abatement levers for Portland cement production is becoming technologically ready for deployment, many are still viewed as prohibitively expensive. Here we develop a generic abatement cost framework for identifying cost-efficient pathways toward substantial emission reductions. We calibrate our model with new industry data in the context of European cement plants that must obtain emission permits under the European Emissions Trading System. We find that a price of \euro 81 per ton of CO$_2$, as observed on average in 2022, incentivizes firms to reduce their annual direct emissions by about one-third relative to the status quo. Yet, these incentives increase sharply at a carbon price of \euro 126 per ton. If cement producers were to expect such carbon price levels to persist in the future, they would have incentives to reduce emissions by almost 80\% relative to current emission levels.
+
+\bigskip
+
+\noin \textbf{Keywords:} marginal abatement cost, carbon emissions, industrial decarbonization, cement production
+
+\noin \textbf{JEL Codes:} M1, O33, Q42, Q52, Q54, Q55, Q58
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%-------------------------------------------------------------------------------------------------------
+%                             INTRODUCTION
+%-------------------------------------------------------------------------------------------------------
+\section{Introduction}
+\label{sec: intro}
+
+In the discussion surrounding the timely transition to a net-zero economy, commentators frequently point to the obstacles of reducing carbon dioxide (CO$_2$) emissions in hard-to-decarbonize industries, such as steel, cement, and chemicals \citep{davis2018net,habert2020environmental,ahman2017global}. These industries deliver products that are essential to a modern economy, yet a major share of their emissions are intrinsic process emissions that will typically not be avoided by phasing out the burning of fossil fuels. In particular, the cement industry alone is responsible for about 8\% of global annual CO$_2$ emissions \citep{fennell2021decarbonizing,iea2018technology,cao2020the}. Like their counterparts in other heavy manufacturing industries, major cement producers have recently embraced net-zero emissions goals by the year 2050 \citep{pca2022roadmap,cembureau2020cementing}. Achieving these goals will require the adoption of abatement levers that drastically reduce the emissions associated with current production processes \citep{griffiths2023decarbonizing,clarke2021active,napp2014a,shen2017cement}.
+
+This paper develops a generic economic model for identifying cost-efficient combinations of abatement levers a firm would need to implement to substantially reduce emissions. We then calibrate our model to new industry data \citep{ecra2022state} in the context of European cement plants. Our numerical analysis considers nine elementary abatement levers that are becoming technologically ready for deployment. They include process improvements, input substitutions, such as the use of supplementary cementitious materials (SCMs), and the installation of carbon capture technologies. Since most of these elementary levers can be freely combined, there are potentially up to $2^9=512$ combined abatement levers. Importantly, the resulting impact on abatement and cost is not separable across the constituent elementary levers. For instance, the abatement impact of SCMs varies depending on whether the use of these materials is combined with a carbon capture installation.
+
+The central economic concept examined in this paper is an abatement cost curve, conceptualized as the life-cycle cost of reducing annual CO$_2$ emissions to some target level. Relative to a status quo level of emissions, the abatement cost of reducing emissions to a target level thus represents the minimal lump-sum payment a firm would require for the corresponding emissions abatement in future time periods. The cost curves emerging from our model framework are generally not convex. Specifically, for abatement increments of a given size, the corresponding increment in abatement costs is generally not increasing as the firm targets more ambitious abatement levels. This feature stands in contrast to \emph{marginal abatement cost curves} popularized by McKinsey \citep{mckinsey2007a} and studied in numerous contexts \citep{harmsen2019long,jiang2020the,huang2016the,lameh2022on,misconel2022model}. A key assumption of traditional marginal abatement cost curves is that the abatement effects of different levers are separable (independent), allowing for elementary levers to be ordered according to their (incremental) marginal cost. Such ordering is not possible in the context of our model, precisely because the joint costs and emission levels corresponding to different combined levers are not separable across the constituent elementary levers \citep{kesicki2012marginal,Vogt-Schilb2014marginal,mckitrick1999a,ward2014the}.
+
+Our numerical analysis examines the incentives for European cement producers to adopt combinations of elementary abatement levers in response to alternative carbon prices that might prevail under the European Emissions Trading System. We find that if prices were to continue at their 2022 average value of \euro 81 per ton of CO$_2$ in future years, firms would have incentives to abate their annual direct (Scope 1) CO$_2$ emissions by 34\%  relative to the status quo. At the same time, our analysis demonstrates that optimal abatement levels are highly sensitive to carbon prices in the range of \euro 90--140 per ton. Specifically, cement producers would optimally reduce their emissions by 78\% at a carbon price of \euro 126 per ton of CO$_2$, while \euro 141 per ton would provide incentives sufficient for near-full decarbonization.
+
+Our findings are generally more favorable than those reported in earlier studies regarding the cost of decarbonizing cement production \citep{obrist2021decarbonization,zuberi2017bottom,huang2021bottom,dinga2022china,fennell2022going,strunge2022marginal}. These differences partly reflect that our calculations are based on new industry data showing advances in the cost and emission profiles of different abatement technologies. They also reflect that our cost calculations rely on an embedded optimization algorithm that selects for each abatement target the unique cost-efficient combination of elementary levers from a large set of technologically feasible combinations.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             SECTION
+%-------------------------------------------------------------------------------------------------------
+\section{Abatement Levers for Portland Cement}
+\label{sec: application}
+
+Portland cement production begins with quarried limestone that is subsequently crushed into small pieces, and then mixed with components such as gypsum, shale, clay, or sand. This mixture is finely ground, dried to a powder, and heated in a rotating kiln to about 1,400\degree C. The heating process converts the mixture to clinker by separating calcium carbonate (CaCO$_3$) into calcium oxide (clinker) and CO$_2$. Cooled clinker is then blended with gypsum and other additives, such as fly ash or slag, before being finely ground into cement \citep{fennell2021decarbonizing,schneider2011sustainable}. Almost all direct (Scope 1) CO$_2$ emissions of cement production stem from the conversion of limestone to clinker, where roughly two-thirds are process emissions resulting from the chemical separation of limestone. The remaining third are emissions caused by burning fossil fuels, frequently coal, for heating the kiln \citep{fennell2022going,schorcht2013best}.
+
+To reduce emissions, cement producers can adopt a range of alternative measures, referred to as \emph{elementary levers}. Our analysis considers nine elementary levers shown in \autoref{fig: levers}. These are grouped into three categories: process improvements, input substitutions, and carbon capture and sequestration technologies. All levers have been successfully demonstrated in recent pilot projects and are expected to become available to representative cement plants in different locations around the world soon. We exclude energy efficiency measures, such as thermal insulation and waste heat recovery, and conventional SCMs, such as fly ash and slag, because many cement producers already apply them. The supply of conventional SCMs is also expected to diminish with the phase-out of coal power plants and conventional steel production \citep{juenger2019supplementary}. Our analysis also omits prospective technologies that are still in earlier stages of development, such as electric or hydrogen-fueled kilns. Details about technological advances in different abatement levers for Portland cement production are available in recent review articles and reports \citep{griffiths2023decarbonizing,napp2014a,rissman2020technologies,ecra2022state}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/Levers.pdf}
+\caption{\textbf{Elementary abatement levers.} This figure illustrates the nine elementary abatement levers considered in our analysis.}
+\label{fig: levers}
+\end{figure}
+
+The elementary lever \emph{Optimized Grinding} refers to the finer grinding of clinker through optimized ball mill settings, thereby increasing the reactivity of the cement as a binding material in concrete \citep{ghalandari2020energy,bohm2015energy}. As a result, more limestone can be used in the final cement mix, reducing the amount of clinker required per ton of cement by about 5\%. \emph{Alternative Fuels} refer to the replacement of fossil fuels with alternative materials, particularly biomass for heating the kiln \citep{uson2013uses,rahman2015recent}. Applicable alternatives include dry sewage sludge (85--100\% biomass), waste tires (up to 28\% biomass), impregnated sawdust (up to 30\% biomass), and refuse-derived fuel (10--60\% biomass). Recent demonstration projects suggest that the biomass share of a reference plant with a biomass share of 12\% in the status quo can be increased to 27\% while maintaining the same burn qualities. Since the use of biomass requires higher heat, the resulting reduction in fuel emissions amounts to about 10\%.
+
+\emph{Recycled Concrete} specifies the replacement of limestone with fines made from recycled demolished concrete, which emit no CO$_2$ when heated in the kiln. Recent demonstration projects and journal articles show that recycled concrete can replace 10--25\% of the initial limestone if the resulting cement is to keep the same reactive properties \citep{cantero2020mechanical,cantero2021water}. \emph{Calcined Clays} and \emph{Carbonated Fines} are SCMs that reduce the amount of clinker required per ton of cement. Calcined clays are produced at lower emissions than clinker by heating materials that can be found in natural clay deposits or industry by-products like paper sludge waste or oil sands tailings \citep{gcca2022calcined}. Calcined clays can reduce the amount of clinker traditionally included in cement by about 15--45\% \citep{scrivener2018calcined,sharma2021limestone,hanein2022clay}. Carbonated fines are obtained from fine particles and powders of recycled concrete that have been exposed to CO$_2$ gas \citep{ouyang2020surface}. They can reduce the amount of clinker by about 30\% \citep{zajac2020effect}.
+
+\emph{LEILAC} (Low Emissions Intensity Lime and Cement) is an alternative kiln design that heats the limestone mixture indirectly and, therefore, keeps process emissions separate from fuel emissions. LEILAC can currently capture 90--95\% of process emissions (56--59\% of total direct emissions) \citep{leilac2020low}. \emph{Amine Scrubbing}, \emph{Oxyfuel}, and \emph{Calcium Looping} are technologies for capturing process and fuel emissions. Amine Scrubbing is a tail-end technology that uses a chemical solvent to separate CO$_2$ from flue gas. Oxyfuel technology burns fuels in the presence of pure oxygen instead of ambient air to produce flue gas with a high CO$_2$ concentration. Calcium Looping separates CO$_2$ from the flue gases by taking advantage of the reversibility of splitting calcium carbonate into calcium oxide and CO$_2$. Specifically, calcium oxide first reacts with CO$_2$ in the flue gas to form calcium carbonate. The calcium carbonate is then heated to separate into the initial components, where the CO$_2$ is captured, and the calcium oxide looped back into the process. Amine Scrubbing, Calcium Looping, and Oxyfuel can currently capture 90--95\% of the CO$_2$ in the flue gases \citep{ecra2022state,rochelle2009amine,iea2018technology,gcca2022calcium}.
+
+Importantly, the abatement effects of the elementary levers are generally not separable. For instance, the emission reductions associated with installing a LEILAC kiln depend on the mix of limestone and recycled concrete loaded into the kiln. Similarly, the abatement effect of Calcium Looping depends on whether clinker is produced in a traditional or a LEILAC kiln. In principle, there are $2^9 = 512$ combinations of elementary levers, each with its own joint cost and emission profile. Yet, our analysis excludes the simultaneous use of calcined clays and carbonated fines, as industry experts remain concerned about potential structural issues for the resulting cementitious material \citep{zajac2020effect}.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             SECTION
+%-------------------------------------------------------------------------------------------------------
+\section{Cost-Efficient Abatement Levers}
+\label{sec: lac}
+
+Our economic model considers a plant that produces a given quantity $q$ of cementitious material. This quantity results in $E_0$ metric tons of CO$_2$ being emitted annually by the plant in its baseline configuration. To reduce emissions, the firm can implement a combination of $m$ different elementary levers. We refer to such a combination as a \emph{combined lever} and denote it by the m-dimensional vector $\vec{v} = (v_1, \ldots, v_m)$, where $v_i \in \{0,1\}$ indicates whether elementary lever $i$ is implemented. Accordingly, $\vec{v}_0 =(0, \ldots, 0)$ reflects the status quo. The set of technologically feasible combined levers is denoted by $V_f$.
+
+A combined lever $\vec{v}$ may require upfront investment $I(\vec{v})$. Since the elementary levers considered in our analysis result in a retrofit of the current production process, the capital expenditures for the plant in its existing form can be considered sunk. Thus, $I(\vec{v}_0) = 0$. A combined lever may also result in modified operating costs, both fixed and variable, for the next $T$ years of operation. Fixed operating costs are denoted by $F_t(\vec{v})$, while variable operating costs are given by $w_t(\vec{v})$ for year $t$. With $r$ denoting the applicable cost of capital, the value of all future discounted expenditures $DE(\cdot)$ associated with the implementation of combined lever $\vec{v}$ is then given by:
+\begin{equation}
+DE(\vec{v}) \equiv \sum_{t=1}^{T} \bigl[w_t(\vec{v}) \cdot q + F_t(\vec{v})\bigr] \cdot \bigl(1+r\bigr)^{-t} + I(\vec{v}).
+\end{equation}
+
+Let $E(\vec{v})$ denote the annual emissions emanating from the plant when the combined lever $\vec{v}$ is pulled. By definition, $E(\vec{v}_0) = E_0$. The firm can choose a target level of $E$ for future emissions on the interval of $[E_-, E_0]$, where $E_- \equiv \min_{\vec{v} \in V_f}{E(\vec{v})}$ denotes the minimal level of emissions attainable with some combined lever in the feasible set $V_f$. Further, let $V_f(E)$ denote all combined levers in $V_f$ that result in the plant's future annual emissions $E(\vec{v})$ not exceeding $E$. For any target level, $E$, the firm seeks to identify the combined lever $\vec{v} \in V_f(E)$ that minimizes the associated discounted future expenditures. The abatement cost of reducing emissions from $E_0$ to $E$ in a \emph{cost-efficient} manner is thus given by:
+\begin{equation}
+AC(E) \equiv \min_{\vec{v} \in V_f(E)}{\{DE(\vec{v})\}- DE(\vec{v}_0)\}}.
+\end{equation}
+
+The abatement cost $AC(E)$ represents, on a life-cycle basis, the break-even value that would leave the firm indifferent between the status quo and re-configuring its plant so that annual emissions will not exceed $E$. Thus, $AC(E)$ reflects the minimal compensation that a firm would require for its investments and increased operating costs to produce the same output with no more than $E$ tons of CO$_2$ emissions per year for the next $T$ years. By construction, $AC(E_0)=0$, and $AC(\cdot)$ is a weakly decreasing function on $[E_-, E_0]$, since $V_f(E_2) \subset V_f(E_1$) if $E_2 < E_1$. Furthermore, $AC(\cdot)$ must be a step function on the interval $[E_-, E_0]$, since it can assume at most finitely many values corresponding to the finite set of feasible levers in $V_f$. Let $E_-= E_n < \ldots < E_i < \ldots < E_1$ denote the stepping points, referred to as \emph{cost-efficient emission thresholds}, of the function $AC(\cdot)$. Thus, $AC(E_i) \leq AC(E_{i-1})$ for $1\leq i \leq n$. Since $AC(E) = AC(E_i)$ for any $E$ with $E_{i} < E < E_{i-1}$, we note that $AC(\cdot)$ is a right-continuous function, i.e.,  $\lim_{E \to \hat{E}} AC(E) = AC(\hat{E})$ for $E > \hat{E}$.
+
+We calibrate our model framework to European reference plants for Portland cement production. Such plants are usually scaled to an annual production capacity of 1.0 million tons of clinker, resulting in $q = 1,381,215$ tons of cementitious material and $E_0 = 832,000$ tons of direct CO$_2$ emissions in the status quo. The operationalization of our model in the context of such plants is described in \methods. This description details how our calculations capture interactions in the financial and emission performance of elementary levers that are implemented jointly. It also documents new industry data \citep{ecra2022state} underlying our calculations, which was corroborated with information from expert interviews, technical reports, and journal articles. Since our metric of interest is the reduction in emissions each year, we also depict the life-cycle abatement cost in annualized form, that is, $AC(E) \cdot A(r,T)^{-1}$, where $A(r,T) = \sum_{t=1}^{T} (1+r)^{-t}$ denotes the annuity factor that values a stream of \euro 1.0 payments over $T$ years at the discount rate $r$.
+
+\autoref{fig: constant_ac}a shows the annualized abatement cost for the $n = 18$ cost-efficient emission thresholds identified in our analysis. While there are potentially up to 512 different combined levers to choose from, only 18 of them are cost-efficient in the sense that the firm cannot achieve lower emissions without incurring a higher cost. At the first emission threshold, our calculations yield that $AC(E_1) = AC(E_0) = 0$. This equality reflects that the elementary lever Optimized Grinding lowers the status quo emissions by 5\% to $E_1 = 790,400$ tCO$_2$ per year, yet also decreases total discounted expenditures because savings in variable costs more than compensate for the added investment expenditure. At all other stepping points, the abatement cost curve is strictly increasing. The most ambitious emissions level at $E_{18}$ amounts to 2,609 tCO$_2$ annually or 0.3\% of the status quo emissions.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth]{images/Constant cement_v10_AC.pdf}
+\caption{\textbf{Cost-efficient abatement for Portland cement.} This figure shows the (\textbf{a}) annualized abatement cost and (\textbf{b}) combined levers for the cost-efficient emission thresholds. Abbreviations are Optimized Grinding (OG), Alternative Fuels (AF), Recycled Concrete (RC), Calcined Clays (CC), LEILAC (LL), Calcium Looping (CL), Oxyfuel (OF), and Amine Scrubbing (AS). Dots highlighted in dark blue indicate the elementary levers that will be implemented at different emission thresholds.}
+\label{fig: constant_ac}
+\end{figure}
+
+\autoref{fig: constant_ac}a also shows an abatement cost curve that is not convex. This non-convexity emerges because the joint cost and emissions levels corresponding to different combined levers are not separable across the constituent elementary levers \citep{kesicki2012marginal,Vogt-Schilb2014marginal,mckitrick1999a,ward2014the}. Thus, holding the size of abatement increments constant, the resulting incremental  (marginal) abatement cost is not always increasing as the firm selects more ambitious target levels $E$. Convex segments of the $AC(\cdot)$ curve emerge for both relatively high and relatively low emissions target levels but not in the mid-range. This lack of convexity stands in contrast to earlier studies on marginal abatement cost curves as popularized by McKinsey \citep{mckinsey2007a} and studied in numerous contexts \citep{harmsen2019long,jiang2020the,huang2016the,lameh2022on,misconel2022model}. A central assumption of marginal abatement cost curves in earlier work is that the abatement impact of different levers is separable, allowing for levers to be ordered by increasing marginal costs \citep{kuosmanen2021shadow,baker2008technical,beaumont2004abatement}.
+
+\autoref{fig: constant_ac}b shows the combinations of elementary levers that correspond to the cost-efficient emissions thresholds. Dots highlighted in dark blue indicate the elementary levers that will be implemented at different emission levels. The lowest positive abatement cost occurs at $E_2 = 756,184$ tCO$_2$ (91\% of the status quo emissions). There, firms would adopt the elementary levers Optimized Grinding (OG) and Alternative Fuels (AF), resulting in an annualized abatement cost of \euro 183,974. For a target of $E_{11} = 274,253$ tCO$_2$ (33\% of the status quo emissions), firms would adopt the lowest-cost carbon capture technology, LEILAC (LL), which captures the process emissions arising in the kiln as limestone is converted to clinker. In conjunction with the three elementary levers Optimized Grinding (OG), Recycled Concrete (RC), and Calcined Clays (CC), this would result in an annualized abatement cost of \euro 40,580,755. As can be seen from \autoref{fig: constant_ac}a and b, this cost would increase by a relatively small amount of \euro 135,560 if the company were also to adopt the elementary lever Alternative Fuels (AF) and thereby lower its annual emissions by an additional amount of 25,212 tCO$_2$. For more ambitious targets, our analysis predicts that firms would install the carbon capture technology Calcium Looping (CL) alone or in combination with LEILAC (LL). The cost information underlying our calculations suggests that the elementary lever Amine Scrubbing (AS) would never be put to use, as other carbon capture technologies dominate this alternative in terms of cost and abatement potential.
+
+Finally, we note that the cost increases projected in \autoref{fig: constant_ac}a are significant relative to the overall revenue that can be obtained from a typical cement plant. To calibrate, the European market price for cement in 2021 was, on average, about \euro 98 per ton \citep{bnp2021heavy}. The annual revenue of a representative plant would, therefore, be \euro 98/t $\cdot$ 1,381,215 t = \euro 135,359,070. Holding the price of the sales product constant, \autoref{fig: constant_ac}a suggests that a two-thirds reduction in annual emissions would result in an annualized abatement cost of about one-third of the plant's annual revenue.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             SECTION
+%-------------------------------------------------------------------------------------------------------
+\section{Optimal Abatement Under Carbon Pricing}
+\label{sec: results}
+
+We now embed the preceding model in a setting where firms face a charge for their CO$_2$ emissions. This charge may reflect a carbon tax or the prevailing market price for emission permits under a cap-and-trade system, such as the European Union Emission Trading System (EU ETS), with which European cement manufacturers must comply. Incentives to reduce emissions then arise from the avoided expenditures for emission permits. If the firm expects the prevailing charge to be \euro $p$ per ton of CO$_2$ in the future, then the total cost $TC(E,p)$ of reducing emissions from $E_0$ to $E$ comprises both the abatement cost and the avoided compliance cost associated with the status quo emissions:
+\begin{equation}
+TC(E,p) = AC(E) - p \cdot (E_0 - E) \cdot A(r,T).
+\end{equation}
+
+For any expected carbon price $p$, the firm would seek to identify the emission level that minimizes the associated total cost. We denote by $E^*(p)$ the \emph{optimal} emissions level that minimizes the total cost, given the carbon price $p$ for the next $T$ years. Thus, $E_0 - E^*(p)$ gives the optimal abatement level. Since $AC(\cdot)$ is a step function, $E^*(p)$ will be one of the $n+1$ steps $\{E_-= E_n,..., E_i,..., E_0\}$ and, therefore, a step function in $p$. We also note that, for any $AC(\cdot)$ curve, the corresponding $E^*(\cdot)$ will always be weakly decreasing in $p$. This follows directly from the observation that $TC(E,p)$ exhibits increasing differences \citep{mas-collel1995microeconomic}, that is, $\frac{\partial}{\partial p} TC(E,p)=E$ is an increasing function in $E$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth]{images/Constant cement_v10_CO2.pdf}
+\caption{\textbf{Optimal abatement for Portland Cement.} This figure shows the (\textbf{a}) optimal abatement at different CO$_2$ prices and (\textbf{b}) optimal combined levers. Abbreviations are Optimized Grinding (OG), Alternative Fuels (AF), Recycled Concrete (RC), Calcined Clays (CC), LEILAC (LL), Calcium Looping (CL), Oxyfuel (OF), and Amine Scrubbing (AS). Dots highlighted in dark blue indicate the elementary levers that will be implemented at different emission thresholds.}
+\label{fig: constant_value}
+\end{figure}
+
+\autoref{fig: constant_value}a shows the optimal abatement levels of European reference plants for Portland cement production for different carbon prices. We find that the optimal abatement response to any carbon price would always select one of nine different combined levers. Owing to the non-convexity of the $AC(\cdot)$ curve, half of the 18 cost-efficient combined levers in \autoref{fig: constant_ac} will never emerge as optimal regardless of the prevailing carbon price. We also find that the $E^*(\cdot)$ curve in \autoref{fig: constant_value}a generally exhibits an inverted S-shape. This reflects a relatively high price elasticity of the optimal abatement level for carbon prices in the range of \euro 90--140/tCO$_2$.
+
+Emission allowances under the EU ETS traded at an average of \euro 81/tCO$_2$ in 2022. If firms expect this price to persist, we find that they are incentivized to reduce annual emissions to 549,503 tCO$_2$ (66\% of the status quo emissions). The corresponding combined lever shown in \autoref{fig: constant_value}b comprises Optimized Grinding (OG), Alternative Fuels (AF), Recycled Concrete (RC), and Calcined Clays (CC). Alternatively, if carbon prices reach at least \euro 126/tCO$_2$, then firms are incentivized to adopt Carbonated Fines (CF) instead of Calcined Clays (CC) and also adopt the carbon capture technology LEILAC (LL), resulting in annual emissions of 184,824 tCO$_2$ (22\% of the status quo emissions). As \autoref{fig: constant_value}a shows, however, there is only a relatively narrow window of carbon prices, where LEILAC emerges as part of an optimal combined lever. Once the expected carbon charges reach \euro 141/tCO$_2$, it becomes advantageous for firms to leapfrog to the more comprehensive carbon capture technology Calcium Looping (CL), which leaves only 4\% of the status quo emissions. Finally, near-complete decarbonization, resulting in 0.3\% of the status quo emissions, would require the addition of Oxyfuel (OF) and a carbon price of at least \euro 1,249/tCO$_2$.
+
+To examine potential variation across cement plants, we test the sensitivity of our findings to various changes in input parameters. In particular, we explore the effects of individual elementary levers being unavailable, different costs for transporting and storing captured CO$_2$, the enhanced operation of carbon capture technologies, and improvements in the cost and capture rates of carbon capture technologies. As detailed in \Suppl$ $ Notes 1--4, our analysis delivers a consistent assessment regarding the magnitudes of the cost of decarbonizing Portland cement and the optimal abatement levels under carbon pricing. In particular, the best response to a carbon price of \euro 81/tCO$_2$ would be to reduce annual emissions by roughly one-third in most variations examined in our sensitivity analysis. More substantial abatement levels amounting to approximately 75\% and 95\% of the status quo emissions would be optimal for carbon prices of about \euro 120/tCO$_2$ and \euro 140/tCO$_2$, respectively, in most variations.
+
+Overall, our findings lend economic support for the recent surge in early market activity for low-carbon cement products \citep{research2022global,george2022report,fennell2022going,hm2023heidelberg}. For instance, Heidelberg Materials, HOLCIM, and CEMEX, three globally leading cement producers, have all begun to implement process improvement and input substitution levers in their production plants worldwide \citep{hm2023annual,holcim2023decarbonizing,cemex2023integrated}. These abatement efforts have enabled all three companies to reduce the global average net direct CO$_2$ emissions to approximately 560 tCO$_2$ per ton of cementitious material in 2022. Over the coming decade, they aim to further expand the use of these levers in production plants around the world. In addition, Heidelberg Materials and HOLCIM each seek to install more than ten large-scale carbon capture facilities at cement plants, primarily in Europe but also in North America, to further reduce the global average net direct CO$_2$ emissions to about 400 tCO$_2$ per ton of cementitious material by 2030.
+
+
+% -------------------------------------------------------------------------------------------------------
+%                             SECTION
+% -------------------------------------------------------------------------------------------------------
+\section{Policy Implications}
+\label{sec: policy}
+
+Current climate policy discussions have yet to reach a consensus on how far carbon pricing regulations or subsidies for decarbonization efforts need to be expanded in order to ensure a timely transition to a net-zero economy. In this regard, our analysis quantifies the sensitivity of the abatement cost of representative European Portland cement plants to different carbon prices. For instance, \autoref{fig: constant_value}a shows that a 55\% increase in the market price of EU ETS emissions allowances relative to the 2022 average of \euro 81/tCO$_2$ could reduce the annual demand for emission permits from representative Portland cement plants from 549,503 to 184,824 permits. If carbon capture technologies were also to improve in cost and capture rates by 20--30\% over the coming decade, as developers anticipate \citep{kearns2021technology}, then a 55\% increase in the prevailing carbon price would even suffice to reduce the annual demand to 23,191 permits (see \Suppl$ $ Note 4 for details).
+
+A widespread policy concern is that deep decarbonization of Portland cement would be too expensive, threatening the affordability of cement for economic development. On this note, earlier studies estimate that comprehensive abatement would double the full cost of cement production \citep{fennell2022going}. While we lack the requisite data to verify such estimates, we note that, without carbon pricing, the $AC(\cdot)$ curve shown in \autoref{fig: constant_ac}a directly quantifies the change in production costs resulting from decarbonization. If there is a carbon pricing regime in place, the increase in the unit cost of producing cement, denoted by $\Delta$, resulting from an increase in the prevailing carbon price from $p_1$ to $p_2$ is given by:
+\begin{equation}
+\Delta = \bigl[[AC(E^*(p_2)) - AC(E^*(p_1))] \cdot A(r,T)^{-1} + p_2 \cdot E^*(p_2) - p_1 \cdot E^*(p_1)\bigr] \cdot q^{-1}.
+\end{equation}
+
+The change in unit production cost $\Delta$ captures that, in response to the higher carbon price, firms can mitigate the financial impact of the carbon price increase by reducing their emissions from $E^*(p_1)$ to $E^*(p_2)$. Suppose the prevailing EU ETS price were to increase from the 2022 average of \euro 81/tCO$_2$ to \euro 126/tCO$_2$. The optimal annual emissions levels of representative cement plants at the two prices would be $E^*(81)=$ 549,503 tCO$_2$ (66\% of the status quo emissions) and $E^*(126)=$ 184,824 tCO$_2$ (22\% of the status quo emissions), respectively, as established in Section \ref{sec: results}. The corresponding increase in production costs would then amount to \euro 16 per ton of cement.
+
+In Germany and other countries, governments seek to accelerate corporate decarbonization efforts by providing targeted subsidies to companies in the form of \emph{carbon contracts for difference}. Such contracts set a fixed carbon price for a given period of time, reducing the risk of price volatility for firms and allowing governments to contractually require firms to reduce their emissions beyond the levels incentivized by current carbon prices. Our model lends itself to estimating the minimum subsidy, $S$, required for cement manufacturers to reduce their annual emissions to a target, $E^T$, when the prevailing carbon price, $p$, only incentivizes emissions of $E^*(p) > E^T$. This annual break-even subsidy is given by:
+\begin{equation}
+S = [AC(E^T) - AC(E^*(p))] \cdot A(r,T)^{-1} - p \cdot (E^*(p) - E^T),
+\end{equation}
+where the minimal annual subsidy per additional ton of CO$_2$ abated is then $S \cdot \bigl(E^*(p) - E^T\bigr)^{-1}$.
+
+Suppose that the prevailing carbon price is again \euro 81/tCO$_2$ and, therefore, absent any contractual agreement, the optimal abatement response of representative cement plants would be to emit $E^*(81)=$ 549,503 tCO$_2$ (66\% of the status quo emissions) annually. For firms to be willing to enter into a contractual agreement that sets the maximum annual emissions of representative plants at $E^T =$ 184,824 tCO$_2$ (22\% of the status quo emissions), we find that the annual subsidy would need to be about \euro 14 million per plant, or \euro 37/tCO$_2$ additionally abated.
+
+The minimal subsidy of \euro 37/tCO$_2$ may seem too low in light of our finding in \autoref{fig: constant_value}a that a carbon price of \euro 126/tCO$_2$ would be required to incentivize firms to reduce their emissions to $E^T = 184,824$ tCO$_2$. The point to recognize is that the carbon contract for difference, as calculated here, amounts to a take-it-leave-it offer that leaves the firm no better off than it would be under a prevailing carbon price of \euro 81/tCO$_2$ and a corresponding best response of annual emissions of $E^*(81)=$ 549,503 tCO$_2$. In practice, one would expect firms to be able to negotiate a subsidy payment with the government that effectivelyshares the available gains from trade and also leaves the firm better off.
+
+The Intergovernmental Panel on Climate Change and other research organizations have published a variety of forecasts for the amount of CO$_2$ that will still be emitted in 2050. Such residual emissions would then have to be compensated by carbon removals in order to achieve a net-zero position. Our findings on the inverted S-shape of firms' optimal abatement suggest that unless carbon prices reach a range of several hundred Euro per ton of CO$_2$ emitted, Portland cement producers would continue to emit at least about 4\% of their current emissions. Of course, such projections must be qualified by their reference to the contemporary manufacturing and abatement technologies that will be available in the future.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             SECTION
+%-------------------------------------------------------------------------------------------------------
+\section{Concluding Remarks}
+\label{sec: conclusion}
+
+This paper has introduced a generic economic model for identifying cost-efficient combinations of abatement levers. Our analysis has considered nine elementary abatement levers that are becoming ready for deployment at Portland cement plants. Calibrating our model to new industry data, we find that carbon prices, as observed on average in the European Emissions Trading System in 2022, provide sufficient incentives for firms to lower their direct emissions by about one-third. Yet, we also find that the incentives are highly sensitive to carbon prices in the range of \euro 90--140 per ton. In particular, if firms were to expect a price of \euro 126 per ton to prevail in the future, their best response would be to abate their emissions by almost 80\% relative to current levels. Abatement incentives increase sharply once carbon prices exceed \euro 141 per ton, where we predict emission reductions of at least 96\%.
+
+One promising extension of our work is to relax the maintained assumption that firms adopt an entire combined lever at the initial point in time. In particular, if companies expect carbon prices under the European Emissions Trading System to rise or the cost and operational performance of certain abatement technologies to decline over time, it may be advantageous to stagger the adoption of different elementary abatement levers across time periods. Moving further afield, our cost analysis can also be extended to quantify the effect of alternative accounting rules for CO$_2$ emissions. For instance, the use of biomass as an alternative fuel in combination with carbon capture and sequestration technology could potentially remove more CO$_2$ from the atmosphere than is emitted. Finally, future work in this line of research could examine advances in abatement technologies as information on their financial and physical performance becomes available. In particular, electrified and hydrogen-fueled kilns are considered two promising technologies.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             Methods
+%-------------------------------------------------------------------------------------------------------
+\section*{Experimental Procedures}
+\label{sec: methods}
+
+% \renewcommand{\thefootnote}{\arabic{footnote}}
+% \renewcommand{\theequation}{A\arabic{equation}}
+% \renewcommand{\thetable}{\arabic{table}}
+% \renewcommand{\thefigure}{\arabic{figure}}
+% \renewcommand{\thesection}{A\arabic{section}}
+\renewcommand{\figurename}{Extended Data Figure}
+\renewcommand{\tablename}{Extended Data Table}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection*{Operationalizing the Model}
+
+This section operationalizes our model framework in the context of Portland cement production to provide expressions for the variables $E(\vec{v})$, $w_t(\vec{v})$, $F_t(\vec{v})$, and $I(\vec{v})$. To obtain compact expressions, it will be convenient to consider the two main ingredients in Portland cement, SCMs and clinker, and the nine elementary levers in the following order: (1) Conventional SCMs, (2) Conventional Clinker, (3) LEILAC, (4) Recycled Concrete, (5) Alternative Fuels, (6) Amine Scrubbing, (7) Oxyfuel, (8) Calcium Looping, (9) Calcined Clays, (10) Carbonated Fines, and (11) Optimized Grinding. We add (1) Conventional SCMs and (2) Conventional Clinker to $\vec{v}$ and assume that this augmented vector, like all subsequent vectors, maintains the same sequence of entries. Thus, $\vec{v} = (v_1, \ldots, v_{11})$, where $v_1, v_2 = 1$ and $v_i \in \{0,1\}$ for $i \in \{3,\ldots,11\}$. Accordingly, the status quo is described by $\vec{v}_0 = (1, 1, 0, \ldots, 0)$. All vectors are considered to be column vectors with $m+2 = 11$ entries.
+
+Entries (3) LEILAC to (8) Calcium Looping in $\vec{v}$ reduce the CO$_2$ intensity of clinker production. To capture that intensity, let $\vec{\beta} = (0, 0, \beta_3, \ldots , \beta_8, 0, 0, 0),$ where $\beta_i \in [0,1]$ for $i \in \{3,\ldots,8\}$ gives the relative reduction of the CO$_2$ intensity of clinker production resulting from implementing lever $i$. For example, our calculations assume a carbon capture rate for (8) Calcium Looping of $\beta_8 = 0.925$ in the reference scenario. Similarly, the elementary levers from (9) Calcined Clays to (11) Optimized Grinding reduce the clinker factor, denoted by $\eta$, which quantifies the tons of clinker required per ton of cement in the status quo. Let $\vec{\alpha} = (0, \ldots, 0, \alpha_9, \alpha_{10}, \alpha_{11}),$ where $\alpha_9$, $\alpha_{10}$, and $\alpha_{11} \in [0,1]$, respectively, give the relative reductions of the clinker factor resulting from implementing the corresponding elementary levers.
+
+To obtain the annual emissions of the reference plant, $E(\vec{v})$, let $\vec{i} = (0, i_2(\vec{v}), i_3, \ldots, i_{11})$ denote the vector of CO$_2$ intensities of production processes and elementary levers measured in tons of CO$_2$ per ton of clinker. Here, $i_3, \ldots, i_{11}$ are the direct input parameters, while the carbon intensity of clinker production, $i_2(\vec{v})$, is given by:
+\begin{equation}
+\label{eq: i}
+i_2(\vec{v}) \equiv i_2 \cdot \bigl[(1 - \beta_3 \cdot v_3) \cdot (1 - \beta_4 \cdot v_4) - \beta_5 \cdot v_5 \bigr] \cdot \prod\limits_{i=6}^{11} (1 - \beta_i \cdot v_i).
+\end{equation}
+Equation \eqref{eq: i} reflects the interaction in the abatement effects of different elementary levers. For instance, the abatement effects of LEILAC ($1 - \beta_3 \cdot v_3$) are multiplicative to those of Recycled Concrete ($1 - \beta_4 \cdot v_4$) and additive to those of Alternative Fuels ($\beta_5 \cdot v_5$) since LEILAC captures process emissions but not fuel-related emissions. With $\vec{i}'$ denoting the transpose of $\vec{i}$, the CO$_2$ intensity of cement for the combined lever $\vec{v}$ is given by:
+\begin{equation}
+i(\vec{v}) \equiv \vec{i}' (\vec{v} \circ \vec{s}_1).
+\end{equation}
+Here $\circ$ refers to the (element-wise) vector product, and $\vec{s}_1$ denotes a vector of adjustment factors for production quantities, given by:
+$$\vec{s}_1 \equiv \bigl(1-\eta, \eta \cdot (1-\vec{\alpha}'\vec{v}), \ldots, \eta \cdot (1-\vec{\alpha}'\vec{v}), \eta \cdot \alpha_9, \eta \cdot \alpha_{10}, \eta \cdot \alpha_{11}\bigr).$$
+The annual emissions of the reference plant following from implementing combined lever $\vec{v}$ are then given by:
+\begin{equation}
+E(\vec{v}) \equiv i(\vec{v}) \cdot q(\vec{v}).
+\end{equation}
+To illustrate the preceding derivations, suppose that the reference plant only implements (9) Calcined Clays. Our calculations then simplify to:
+$$E\bigl((1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0)\big) = q_{cl} \cdot \bigl((1 - \alpha_{9}) \cdot i_2 + \alpha_9 \cdot i_9 \bigr).$$
+
+Turning to variable operating costs, $w_t(\vec{v})$, let $\vec{w}_t = (w_{1,t}, w_{2,t}(\vec{v}), w_{3,t}, \ldots, w_{11,t})$ denote the vector of variable operating cost of production processes and elementary levers in year $t$ measured in \euro$ $ per ton of clinker. The variable operating cost of clinker production, $w_{2,t}(\vec{v})$, is thereby given by:
+\begin{equation}
+w_{2,t}(\vec{v}) \equiv w_{2,t} + w_{2,t}^{CO_2} \cdot i_2^{cap}(\vec{v}),
+\end{equation}
+where $w_{2,t}^{CO_2}$ refers to the cost per ton of captured CO$_2$ for transportation and storage, and $i_2^{cap}(\vec{v}) \equiv i_2 \cdot (1 - \beta_4 \cdot v_4 - \beta_5 \cdot v_5) - i_2(\vec{v})$ quantifies the tons of CO$_2$ captured per ton of clinker produced. The variable cost per ton of cement resulting from a combined lever $\vec{v}$  then becomes:
+\begin{equation}
+w_t(\vec{v}) \equiv \vec{w}_t' (\vec{v} \circ \vec{s}_1).
+\end{equation}
+
+For fixed operating costs and upfront investment, let $\vec{F}_t = (F_{1,t}, \ldots, F_{11,t})$ denote the vector of annual fixed operating costs of production processes and elementary levers in year $t$. Similarly, let $\vec{I} = (0, 0, I_1, \ldots, I_{11})$ denote the vector of upfront capital expenditures of production processes and elementary levers. The fixed operating cost and upfront investment resulting from implementing the combined lever $\vec{v}$ are then:
+\begin{gather}
+F_t(\vec{v}) \equiv \vec{F}_t' (\vec{v} \circ \vec{s}_2) \text{ and } I(\vec{v}) \equiv \vec{I}' (\vec{v} \circ \vec{s}_2),
+\end{gather}
+where $\vec{s}_2$ denotes a vector of adjustment factors for production capacity given by:
+$$\vec{s}_2 = \bigl(1, 1, 1-\vec{\alpha}'\vec{v}, \ldots, 1-\vec{\alpha}'\vec{v}, 1, 1, 1 \bigr).$$
+
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection*{Cost and Operational Parameters}
+
+Cost and operational parameters of elementary levers mainly stem from a recent report by the European Cement Research Academy (ECRA) \citep{ecra2022state}. This report provides a current and comprehensive assessment of technologies for increasing energy efficiency and reducing greenhouse gas emissions of Portland cement production. The assessment has been conducted based on industry data provided and reviewed by members and project partners of the Global Cement and Concrete Association. For additional validation, we cross-checked all input parameters with information obtained from expert interviews, technical reports, and peer-reviewed academic articles (see \Suppl$ $ Data for details).
+
+Where parameter ranges were provided, we initially selected point estimates within the ranges based on expert interviews or the arithmetic mean of the highest and lowest values of a particular range. In particular, the upfront investment, fixed operating cost, and variable operating cost of carbon capture technologies were calculated as the arithmetic mean of the ranges in the ECRA report. Since the report provides investment costs for carbon capture technologies for a cement production plant with an annual production capacity of 2.0 million tons of clinker, we divided the values in the report by an adjustment factor of approximately 1.5 to account for economies of scale. This adjustment factor is based on the fact that the report gives investment costs of \euro 160 per ton of clinker for a reference plant for cement production with an annual capacity of 2.0 million tons of clinker and of \euro 210 per ton of clinker for a plant with a capacity of 1.0 million tons of clinker. Thus, $\frac{2 \cdot 160}{210} \approx 1.5$. Cost information for years before 2020 was adjusted for inflation using an annual average inflation rate of 2\%.
+
+Information on the operational cost of the carbon capture technologies is stated in the ECRA report without differentiation in fixed and variable components. Therefore, we estimated an allocation of the reported costs based on the additional demand for thermal and electrical energy required by the technologies and the corresponding unit cost for the respective energy medium, as provided in the report. For example, the report provides total operating costs of \euro 49 per ton of clinker for Amine Scrubbing. At the same time, the report specifies for Amine Scrubbing an additional demand for thermal energy of up to 3,500 Mega-joule per ton of clinker and for electrical energy of 80--129 kilowatt-hours per ton of clinker. Multiplying these values with the cost of gas (\euro 4.4 per Giga-joule) and electricity (\euro 93 per Megawatt-hour) given in the report yields a fuel-related variable operating cost of \euro 22.8--27.4 per ton of clinker. The remaining cost of \euro 21.6--26.2 per ton of clinker was considered fixed. One exception to this procedure was LEILAC, as the estimated fuel-related variable operating cost turned out to be higher than the total operating cost. Therefore, we assumed that the total operating cost stated in the report is only comprised of variable components and that changes in fixed operating costs are negligible.
+
+\begin{table}[ht!]
+\centering
+\begin{threeparttable}
+\caption{\textbf{Main changes in cost and operational parameters.}}
+\label{tab: input}
+\small
+\setlength\tabcolsep{3pt} % default value: 6pt
+\begin{tabular}{l c c c c}
+\toprule
+& \textbf{Abatement}
+& \textbf{Investment}
+& \textbf{Fixed Cost}
+& \textbf{Variable Cost}
+\\
+in 2020\euro
+& \%
+& \euro
+& \euro/year
+& \euro/ton of clinker
+\\
+\midrule
+
+\multicolumn{4}{l}{\textbf{Process Improvement}}\\
+Optimized Grinding & 5.0\% clinker replacement & 5,000,000 & 0 & -0.03\\
+\multicolumn{4}{l}{\textbf{Input Substitution}}\\
+Alternative Fuels & 15.0\% increase in biomass & 5,000,000 & 0 & -0.21\\
+Recycled Concrete & 16.0\% limestone replacement & 5,000,000 & 2,240,000 & -0.69\\
+Calcined Clays$^1$ & 25.0\% clinker replacement & 45,454,546 & 3,750,000 & -5.80\\
+Carbonated Fines$^2$ & 30.0\% clinker replacement &  75,000,000 & 4,035,326 & 16.55\\
+\multicolumn{4}{l}{\textbf{Carbon Capture}}\\
+LEILAC & 57.3\% capture rate & 150,937,500 & 0 & 7.50\\
+Calcium Looping & 92.5\% capture rate & 282,187,500 & 3,855,000 & 7.15\\
+Oxyfuel & 92.5\% capture rate & 203,437,500 & 595,000 & 22.91\\
+Amine Scrubbing & 92.5\% capture rate & 155,859,375 & 23,881,500 & 25.12\\
+
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\scriptsize
+\item 1: For an annual production volume of 165,000 tons; 2: For an annual production volume of 300,000 tons.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Extended Data \autoref{tab: input} shows for each elementary lever the main changes in operational parameters and operating cash flows relative to the status quo (see \Suppl$ $ Data for details). All levers require upfront investment to retrofit the manufacturing units in place or build an additional production or recycling unit onsite. Most levers also require incremental fixed costs to cover increased labor, insurance, and maintenance costs for the added production or processing facilities. Exceptions are Alternative Fuels and Optimized Grinding, where existing machinery is upgraded. Changes in variable costs are negative for levers entailing cost savings relative to the status quo. The variable costs of carbon capture technologies reported in the table do not include an assumed \euro 80 per ton of captured CO$_2$ for transportation and storage.
+
+Our calculations set the cost of capital at 7.0\% and the useful life of capital investments at 30 years. The abatement effects of most levers are calculated conservatively, that is, below their technical upper bounds reported above. For instance, our calculations set the replacement of limestone with recycled concrete at 16\% rather than the upper bound of 25\% to reflect potential variation across plants. Several levers considered in our analysis replace either fossil fuels, limestone, or clinker with alternatives that entail lower emission intensities. Among the input substitution levers, only calcined clays have a positive CO$_2$ intensity due to heat required for the calcination process. Given our focus on direct emissions, the accounted CO$_2$ intensity of Alternative Fuels, Recycled Concrete, Optimized Grinding, and Carbonated Fines is zero. For instance, recycled concrete as a raw material input and the direct use of limestone, enabled by Optimized Grinding, entail no additional direct CO$_2$ emissions. Also, the CO$_2$ required for Carbonated Fines is assumed to be sourced externally or from the plant's carbon capture unit.
+
+
+%-------------------------------------------------------------------------------------------------------
+%                             Data and Code Availability
+%-------------------------------------------------------------------------------------------------------
+\section*{Data availability}
+Data used in this study are referenced in the paper and the \Suppl$ $ Information. Data underlying the plots are provided in an Excel file available as part of the \Suppl$ $ Data. Additional information is available upon request to the corresponding authors.
+
+\section*{Code availability}
+Computational code is available upon request to the corresponding authors.
+
+%-------------------------------------------------------------------------------------------------------
+%                             References for Main Body
+%-------------------------------------------------------------------------------------------------------
+% \bibliographystyle{plainnat}
+\bibliographystyle{naturemag}
+{\small \bibliography{HeidelbergCement_v7}}
+
+%-------------------------------------------------------------------------------------------------------
+%                             Author contributions
+%-------------------------------------------------------------------------------------------------------
+\section*{Author contributions}
+S.R. initiated the research question and led the development of the model framework. G.G. led the process of operationalizing the model framework for Portland cement production. G.G. and R.M. jointly implemented the model framework in Python and calculated the numerical analysis. R.M. led the data collection. R.M. and A.K. jointly led the expert interviews. A.K. led the literature review. All authors jointly analyzed the findings and contributed to the writing of the paper.
+
+%-------------------------------------------------------------------------------------------------------
+%                             Competing interests
+%-------------------------------------------------------------------------------------------------------
+\section*{Competing interests}
+The authors declare no competing financial or non-financial interests.
+
+\newpage
+%-------------------------------------------------------------------------------------------------------
+%                             SUPPLEMENTARY INFORMATION
+%-------------------------------------------------------------------------------------------------------
+\appendix
+\renewcommand{\thefootnote}{\arabic{footnote}}
+% \renewcommand{\theequation}{A\arabic{equation}}
+% \renewcommand{\thetable}{\Suppl$ $ Table \arabic{table}}
+% \renewcommand{\thefigure}{\Suppl$ $ Figure \arabic{figure}}
+% \renewcommand{\thesection}{A\arabic{section}}
+\renewcommand{\figurename}{\Suppl$ $ Figure}
+\renewcommand{\tablename}{\Suppl$ $ Table}
+\renewcommand{\refname}{\Suppl$ $ References}
+% \renewcommand\thesection{\Suppl$ $ Note \arabic{section}}
+\renewcommand{\thesubsection}{\Suppl$ $ Note \arabic{subsection}}
+\setcounter{footnote}{0}
+\setcounter{section}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+% \begin{center}
+% \textbf{\Suppl$ $ Information: \\ \emph{The Cost of Decarbonizing Portland Cement}}
+
+% \bigskip
+% \textbf{Gunther Glenk}, University of Mannheim and Massachusetts Institute of Technology, \\
+% \textbf{Anton Kelnhofer}, Technical University of Munich, \\
+% \textbf{Rebecca Meier}, University of Mannheim, \\
+% \textbf{Stefan Reichelstein}, University of Mannheim, Stanford University, and Leibniz Centre for European Economic Research
+
+% \end{center}
+
+\section*{\Suppl$ $ Information}
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection{Availability Restrictions}
+\label{sec: sn-restrictions}
+
+Some elementary levers may not be available in some geographic regions. For instance, Alternative Fuels may be unavailable to cement plants due to limited supply from nearby biomass producers or excessive demand from other industrial production processes, such as steel production. Alternatively, Recycled Concrete, Calcined Clays, or Carbonated Fines may be unavailable due to a lack of demolished concrete or natural resources. In addition, the carbon capture technologies considered in our analysis may not reach the technological maturity required for industrial-scale deployment until later than anticipated. Therefore, we repeat our calculations in nine variations, each examining the possibility that a particular elementary lever may be unavailable.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens1_AC.pdf}
+\caption{\textbf{Cost-efficient abatement for Portland cement.} This figure shows the annualized abatement cost for the cost-efficient emission thresholds, assuming a particular elementary lever is unavailable. The cost-efficient combined levers corresponding to the abatement costs are provided in the \Suppl$ $ Data.}
+\label{fig: sens1_ac}
+\end{figure}
+
+\Suppl$ $ \autoref{fig: sens1_ac} shows the resulting annualized abatement cost curves as colored lines, while the cost-efficient combined levers corresponding to the cost curves are provided in the \Suppl$ $ Data. As one would expect, all of the colored abatement cost curves lie on or above the reference scenario. Yet, the differences in the colored cost curves relative to the reference scenario are small for most variations. If Optimized Grinding is unavailable, then the annualized abatement cost at the first emission threshold is no longer \euro 0/tCO$_2$ but \euro 193,657/tCO$_2$. Alternatively, if the lever Carbonated Fines is excluded, then the annualized abatement cost curve shows higher values for both initial and substantial emission reductions. Finally, if the lever LEILAC is unavailable, it would be cost-efficient for firms to leapfrog to the more comprehensive carbon capture technology Calcium Looping.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens1_CO2.pdf}
+\caption{\textbf{Optimal abatement for Portland Cement.} This figure shows the optimal abatement at different CO$_2$ prices, assuming a particular elementary lever is unavailable. The optimal combined levers corresponding to the abatement levels are provided in the \Suppl$ $ Data.}
+\label{fig: sens1_value}
+\end{figure}
+
+The resulting optimal abatement levels under carbon pricing are shown as colored lines in \Suppl$ $ \autoref{fig: sens1_value}, with the corresponding optimal combined levers being relegated to the \Suppl$ $ Data. Due to the higher abatement costs, the $E^*(\cdot)$ curve of most variations is shifted to the right of the reference scenario. Deviations from the reference scenario, however, are again relatively small for most variations. In all variations, the optimal abatement level remains highly elastic for carbon prices between \euro 90--140/tCO$_2$. In particular, a firm's best response to a carbon price of \euro 81/tCO$_2$ would be to reduce annual emissions by about one-third, while an abatement of 90--95\% would be optimal at a price of \euro 141/tCO$_2$.
+
+
+\newpage
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection{Cost of Transporting and Storing CO$_2$}
+\label{sec: sn-co2}
+
+Our analysis has assumed a cost of \euro 80 per ton of captured CO$_2$ for transportation and storage. Yet, this cost can vary substantially depending on the type of infrastructure in place or the distance to storage sites. In this section, we extend our analysis to settings, where the cost of transporting and storing CO$_2$ can vary upward or downward by either 10\%, 20\%, or 30\%.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens4_AC.pdf}
+\caption{\textbf{Cost-efficient abatement for Portland cement.} This figure shows the annualized abatement cost for the cost-efficient emission thresholds, assuming changes in the costs of transporting and storing captured CO$_2$. The cost-efficient combined levers corresponding to the abatement costs are provided in the \Suppl$ $ Data.}
+\label{fig: sens4_ac}
+\end{figure}
+
+The resulting annualized abatement cost curves shown in \Suppl$ $ \autoref{fig: sens4_ac} are higher (lower) for increases (decreases) in the cost of CO$_2$ sequestration, though only for lower emission thresholds that require the deployment of carbon capture technologies. The magnitudes of the relative changes in the annualized abatement costs are generally less pronounced than the corresponding relative changes in the cost of CO$_2$ sequestration, because the cost of CO$_2$ sequestration applies to only a fraction of the total emissions. Furthermore, the shape of the abatement cost curves and the underlying cost-efficient combined levers remain unchanged, because the changes in the cost of CO$_2$ sequestration affect all carbon capture technologies in the same way.
+
+The optimal abatement levels under carbon pricing shown in \Suppl$ $ \autoref{fig: sens4_co2} shift to the left (right) of the reference scenario for decreases (increases) in the cost of CO$_2$ sequestration once carbon capture technologies are deployed. The relative deviations from the reference scenario are again smaller than the corresponding relative change in the cost of CO$_2$ sequestration. For instance, if the cost of CO$_2$ sequestration is 30\% higher (i.e., \euro 104/tCO$_2$), then the carbon price must be at least 17\% higher than in the reference scenario (i.e., \euro 165/tCO$_2$) to provide sufficient incentive for firms to reduce annual emissions by 96\% relative to the status quo.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens4_CO2.pdf}
+\caption{\textbf{Optimal abatement for Portland Cement.} This figure shows the optimal abatement at different CO$_2$ prices for alternative changes in the costs of transporting and storing captured CO$_2$. The optimal combined levers corresponding to the abatement levels are provided in the \Suppl$ $ Data.}
+\label{fig: sens4_co2}
+\end{figure}
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection{Deep Carbon Capture}
+\label{sec: sn-deep-ccs}
+
+Our analysis assumes that cement producers would implement two carbon capture technologies to achieve near-complete decarbonization. An alternative approach could be to operate one carbon capture technology at a higher capture rate but also with increased variable operating costs. % \citep{dods2021deep}
+To examine the potential for such an enhanced operation of carbon capture technologies, we repeat our calculations with the capture rates set at the technical maximum value of 95\%. In addition, we run several variations where the variable operating costs of carbon capture technologies are higher than in Extended Data \autoref{tab: input} by specific values in the range of 10--60\%.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens6_AC.pdf}
+\caption{\textbf{Cost-efficient abatement for Portland cement.} This figure shows the annualized abatement cost for the cost-efficient emission thresholds, assuming deep operation of carbon capture technologies. The cost-efficient combined levers corresponding to the abatement costs are provided in the \Suppl$ $ Data.}
+\label{fig: sens6_ac}
+\end{figure}
+
+The resulting annualized abatement cost curves are shown as colored lines in \Suppl$ $ \autoref{fig: sens6_ac}. All of the curves are shifted up and to the left of the reference scenario for emission thresholds that require the deployment of carbon capture technologies. However, the deviations from the reference scenario are relatively small, even for the most pronounced changes in input parameters. Importantly, it is still cost-efficient to combine two carbon capture technologies when cement producers seek to reduce emissions by more than 97\%. The cost-efficient combined levers corresponding to the abatement costs are provided in the \Suppl$ $ Data.
+
+\Suppl$ $ \autoref{fig: sens6_value} shows the optimal abatement levels under carbon pricing as colored lines. Consistent with the changes in the abatement cost curves, the colored $E^*(\cdot)$ curves generally lie below and to the left of the reference scenario for emission thresholds that involve carbon capture technologies. However, the differences from the reference scenario are small. In particular, the carbon price required to incentivize firms to reduce emissions by about 97\% is almost identical to the reference scenario for all variations. This is because the increase in variable costs has a countervailing effect on the improved capture rates.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens6_CO2.pdf}
+\caption{\textbf{Optimal abatement for Portland Cement.} This figure shows the optimal abatement at different CO$_2$ prices for deep operation carbon capture technologies. The optimal combined levers corresponding to the abatement levels are provided in the \Suppl$ $ Data.}
+\label{fig: sens6_value}
+\end{figure}
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\subsection{Carbon Capture Technologies}
+\label{sec: sn-ccs}
+
+With industrial decarbonization gaining momentum, carbon capture technologies are expected to improve in cost and capture rates as learning effects materialize with the increasing cumulative deployment of the technologies. Developers of recent demonstration projects, for instance, have estimated that improvements of 20--30\% could be achieved within this decade \citep{kearns2021technology}. To examine the impact of such advances, we calculate simultaneous improvements in the costs and capture rates of all carbon capture technologies. In particular, we compute several variations where the input parameters of the carbon capture technologies are simultaneously better than in Extended Data \autoref{tab: input} by specific values in the range of 10--60\%. We again limit the improvements in capture rates to the technical maximum value of 95\%.
+
+\Suppl$ $ \autoref{fig: sens2_ac} shows the resulting annualized abatement cost curves as colored lines. As might be expected, improvements in carbon capture technologies reduce the annualized abatement costs for emission thresholds that require the deployment of these technologies. Yet, the relative changes from the reference scenario are again relatively small, even for the most pronounced improvements. Moreover, the shape of the abatement cost curves and the underlying cost-efficient combined levers remain unchanged, because the changes in the costs and capture rates apply equally to all carbon capture technologies.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens2_AC.pdf}
+\caption{\textbf{Cost-efficient abatement for Portland cement.} This figure shows the annualized abatement cost for the cost-efficient emission thresholds, assuming improvements in carbon capture technologies. The cost-efficient combined levers corresponding to the abatement costs are provided in the \Suppl$ $ Data.}
+\label{fig: sens2_ac}
+\end{figure}
+
+\Suppl$ $ \autoref{fig: sens2_value} shows the optimal abatement levels under carbon pricing. Consistent with the reduced abatement costs, the curves of all variations are shifted to the left of the reference scenario, though only for higher abatement levels that require the installation of one or more carbon capture technologies. The relative deviations of all variations from the reference scenario are again small. For instance, if the costs and capture rates of all carbon capture technologies improved by 10\%, then a carbon price of \euro 133/tCO$_2$ would incentivize firms to reduce emissions by 98\% relative to the status quo.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{images/Constant cement_v10_sens2_CO2.pdf}
+\caption{\textbf{Optimal abatement for Portland Cement.} This figure shows the optimal abatement at different CO$_2$ prices for alternative improvements in carbon capture technologies. The optimal combined levers corresponding to the abatement levels are provided in the \Suppl$ $ Data.}
+\label{fig: sens2_value}
+\end{figure}
+
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+\end{document}
